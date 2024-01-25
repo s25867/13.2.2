@@ -1,26 +1,45 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 
-const Home = () => <h2>Home</h2>;
-const About = () => <h2>About</h2>;
-const Services = () => <h2>Services</h2>;
-const Contact = () => <h2>Contact</h2>;
-const ContactUs = () => <h2>Contact Us</h2>;
-const ContactPl = () => <h2>Contact Pl</h2>;
-const ContactDe = () => <h2>Contact De</h2>;
-const NoMatch = () => <h3>Nie znaleziono elementu</h3>;
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+const Add = () => {
+  let query = useQuery();
+  let x = Number(query.get("x"));
+  let y = Number(query.get("y"));
+  return <h2>{x + y}</h2>;
+};
+
+const Sub = () => {
+  let query = useQuery();
+  let x = Number(query.get("x"));
+  let y = Number(query.get("y"));
+  return <h2>{x - y}</h2>;
+};
+
+const Mul = () => {
+  let query = useQuery();
+  let x = Number(query.get("x"));
+  let y = Number(query.get("y"));
+  return <h2>{x * y}</h2>;
+};
+
+const Div = () => {
+  let query = useQuery();
+  let x = Number(query.get("x"));
+  let y = Number(query.get("y"));
+  return <h2>{x / y}</h2>;
+};
 
 const App = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/contact/us" element={<ContactUs />} />
-      <Route path="/contact/pl" element={<ContactPl />} />
-      <Route path="/contact/de" element={<ContactDe />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="/add" element={<Add />} />
+      <Route path="/sub" element={<Sub />} />
+      <Route path="/mul" element={<Mul />} />
+      <Route path="/div" element={<Div />} />
     </Routes>
   </Router>
 );
